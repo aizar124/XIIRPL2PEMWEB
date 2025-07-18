@@ -1,9 +1,19 @@
+<!-- mysqli_connect untuk mengkoneksi ke database -->
+ <!-- mysqli_query untuk mengelola data table -->
+  <!-- mysqli_fetch_assoc untuk menyimpan hasil retrieve ke dalam table -->
+
 <?php
-$nama = "Mahasiswa01";
-$nrp = "1234567890";
-$email = "mahasiswa01@gmail.com";
-$jurusan = "Teknik Informatika";
-$gambar = "ireng.jpg";
+$conn = mysqli_connect(hostname: "localhost", username: "root", password: "", database: "phpdasar");
+// $query = query('SELECT * FROM mahasiswa');
+echo "cek";
+$result = mysqli_query($conn, 'SELECT * FROM mahasiswa');
+    $rows = [];
+
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[]  =$row;
+}
+
+
 
 
 
@@ -18,7 +28,7 @@ $gambar = "ireng.jpg";
 </head>
 <body>
     <h1>Tampilan Tabel MySQL</h1>
-    <h2>Nama Mahasiswa : <?= $nama; ?></h2>
+    <h2>Nama Mahasiswa : </h2>
     <hr>
     <a href="tambah.php">Tambah Data Mahasiswa</a>
     <table border="1">
@@ -31,21 +41,23 @@ $gambar = "ireng.jpg";
             <th>Email</th>
             <th>Jurusan</th>
         </tr>
+        <?php foreach( $rows as $row) : ?>
         <tr>
             <td>1</td>
             <td>
                 <a href="">ubah</a>
                 <a href="">hapus</a>
             </td>
-            <td><?= $nama; ?></td>
-            <td><?= $nrp ?></td>
+            <td><?= $row['nama'] ?></td>
+            <td><?= $row['nrp'] ?></td>
             <td>
-                <img src="img/<?= $gambar ?>" width="50">
+                <img src="img/<?= $row['gambar'] ?>" width="50">
             </td>
-            <td><?= $email ?></td>
-            <td><?= $jurusan ?></td>
+            <td><?= $row['email'] ?></td>
+            <td><?= $row['jurusan'] ?></td>
             
         </tr>
+        <?php endforeach; ?>
     </table>
 </body>
 </html>
