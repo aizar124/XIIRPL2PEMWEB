@@ -10,7 +10,8 @@ function query ($query): array{
         $rows[]  =$row;
 }
     return $rows;
-}
+    $aizar
+} 
 
 
 ?>
